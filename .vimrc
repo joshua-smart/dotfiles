@@ -7,6 +7,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 Plug 'DrTom/fsharp-vim'
+Plug 'itchyny/calendar.vim'
 
 call plug#end()
 
@@ -42,3 +43,6 @@ let g:ale_fixers={
 \   '*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 let g:ale_fix_on_save=1
+
+" transparent bg
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE

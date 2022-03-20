@@ -1,6 +1,5 @@
 call plug#begin()
 
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'yggdroot/indentline'
 Plug 'airblade/vim-gitgutter'
@@ -8,12 +7,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 Plug 'DrTom/fsharp-vim'
 Plug 'itchyny/calendar.vim'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
 syntax on
-colorscheme onedark
-let g:airline_theme='onedark'
+colorscheme nord
+let g:airline_theme='nord'
 
 set encoding=utf-8
 set fileencoding=utf-8

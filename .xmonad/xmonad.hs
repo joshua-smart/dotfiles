@@ -32,14 +32,14 @@ myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 -- Width of the window border in pixels.
-myBorderWidth   = 1
+myBorderWidth   = 2
 -- Set Windows key as modMask
 myModMask = mod4Mask
 -- Workspace names
 myWorkspaces = ["main", "code", "web", "teams", "office"]
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#404040"
+myFocusedBorderColor = "#5e81ac"
 
 -- #######################
 -- ##### KEYBINDINGS #####
@@ -120,6 +120,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume 3 +10%")
     , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume 3 -10%")
     , ((0, xF86XK_AudioMute),        spawn "pactl set-sink-mute 3 toggle")
+
+    -- Toggle date
+    , ((modm, xK_t), spawn "polybar-msg action \"#date.toggle\"")
     ]
     ++
 
@@ -256,6 +259,7 @@ myStartupHook = do
     spawnOnce "picom &"
     spawnOnce "polybar &"
     spawnOnce "unclutter -idle 1 &"
+    spawnOnce "udiskie &"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

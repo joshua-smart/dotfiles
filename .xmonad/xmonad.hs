@@ -123,6 +123,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Toggle date
     , ((modm, xK_t), spawn "polybar-msg action \"#date.toggle\"")
+
+    , ((0, xK_Print), spawn "scrot ~/Images/screenshots/%Y-%m-%d-%T.png")
     ]
     ++
 
@@ -260,6 +262,7 @@ myStartupHook = do
     spawnOnce "polybar &"
     spawnOnce "unclutter -idle 1 &"
     spawnOnce "udiskie &"
+    spawnOnce "alacritty -o window.dimensions.columns=171 window.dimensions.lines=40 -e cbonsai --live"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

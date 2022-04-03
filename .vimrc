@@ -1,19 +1,24 @@
 call plug#begin()
 
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'yggdroot/indentline'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 Plug 'DrTom/fsharp-vim'
 Plug 'itchyny/calendar.vim'
-Plug 'arcticicestudio/nord-vim'
+Plug 'drewtempelmeyer/palenight.vim'
 
 call plug#end()
 
+set laststatus=2
+set noshowmode
+
 syntax on
-colorscheme nord
-let g:airline_theme='nord'
+colorscheme palenight
+" let g:airline_theme='palenight'
+let g:lightline = { 'colorscheme': 'palenight' }
 
 set encoding=utf-8
 set fileencoding=utf-8

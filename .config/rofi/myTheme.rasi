@@ -7,7 +7,7 @@
 * {
     background-color:      #00000000;
     text-color:           #cccccc;
-    font:            "FiraCode NF 10";
+    font:            "FiraCode NF 11";
 }
 window {
     background-color: #222222;
@@ -28,16 +28,16 @@ listview {
 }
 prompt {
     background-color: #363636;
-    padding: 4px;
+    padding: 4px 8px 4px 8px;
 }
 entry {
     expand:     false;
     width:      10em;
-    padding: 4px;
+    padding: 5px 8px 3px 8px;
 }
 element {
     background-color: #363636;
-    padding: 4px;
+    padding: 5px 8px 3px 8px;
 }
 element selected {
     background-color: #555555;

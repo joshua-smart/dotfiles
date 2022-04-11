@@ -32,7 +32,7 @@ myBorderWidth = 0
 -- Set Windows key as modMask
 myModMask = mod4Mask
 -- Workspace names
-myWorkspaces = ["main", "code", "web", "teams", "office"]
+myWorkspaces = ["1", "2"]
 -- Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor  = "#13161a"
 myFocusedBorderColor = "#7f4991"
@@ -43,13 +43,14 @@ myFocusedBorderColor = "#7f4991"
 myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     [ ((modm,               xK_Return               ), spawn myTerminal                                  ) -- Launch terminal
     , ((modm,               xK_numbersign           ), spawn myBrowser                                   ) -- Launch browser
+    , ((modm,               xK_n                    ), spawn $ myTerminal ++ " -e node"                  ) -- Launch node in terminal
     , ((modm,               xK_d                    ), spawn "rofi -show drun"                           ) -- Launch drun menu
     , ((modm,               xK_f                    ), spawn "rofi -show run"                            ) -- Launch run menu
     , ((modm,               xK_s                    ), spawn "rofi -show ssh"                            ) -- Launch ssh menu
     , ((modm,               xK_q                    ), kill                                              ) -- Close focused window
     , ((modm,               xK_space                ), sendMessage NextLayout                            ) -- Rotate through layouts
     , ((modm .|. shiftMask, xK_space                ), setLayout $ XMonad.layoutHook conf                ) -- Reset layout
-    , ((modm,               xK_n                    ), refresh                                           ) -- Refresh windows to standard sizes
+    , ((modm .|. shiftMask, xK_n                    ), refresh                                           ) -- Refresh windows to standard sizes
     , ((modm,               xK_Tab                  ), windows W.focusDown                               ) -- Rotate focus through windows
     , ((modm,               xK_j                    ), windows W.focusDown                               ) -- Move focus to next window
     , ((modm,               xK_k                    ), windows W.focusUp                                 ) -- Move focus to previous window
@@ -79,7 +80,7 @@ myKeys conf@XConfig {XMonad.modMask = modm} = M.fromList $
     ++
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9] -- Switch to workspace N
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]] -- Move current window to workspace N
+        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]] -- Move current window to workspace N
     ++
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..] -- Switch to monitor N
@@ -96,7 +97,7 @@ myMouseBindings XConfig {XMonad.modMask = modm} = M.fromList
 -- ##### LAYOUT #####
 -- ##################
 uniformBorder i = Border i i i i
-myBorder i = Border 0 i i i
+myBorder i = Border i i i i
 
 mySpacing i = spacingRaw True (myBorder i') True (uniformBorder i') True
     where i' = fromIntegral i
@@ -135,10 +136,9 @@ myLogHook = dynamicLog
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
-    spawnOnce "polybar &"
+    spawnOnce "polybar primary &"
     spawnOnce "unclutter -idle 1 &"
     spawnOnce "udiskie &"
-    spawnOnce "alacritty -o window.dimensions.columns=171 window.dimensions.lines=40 -e cbonsai --live"
 
 -- ##############
 -- #### MAIN ####

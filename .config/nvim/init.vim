@@ -5,9 +5,15 @@ Plug 'junegunn/limelight.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'yggdroot/indentline'
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'hrsh7th/vim-vsnip'
+
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-vsnip'
 call plug#end()
 
 " ----- Theme -----
@@ -55,6 +61,7 @@ xnoremap J :move '>+1<CR>gv-gv
 nnoremap <C-g> :Goyo<CR>
 
 " ----- General Settings -----
+set nocompatible " enter the current millenium
 set number " line numbers
 set guicursor=n-v-c:block-Cursor " block cursor
 " 4-space tab configuration
@@ -73,3 +80,33 @@ set autoread " auto read file when changed outside editor
 set ic
 set cursorline
 set wrap linebreak nolist " soft wrap lines
+filetype plugin on " enable netrw plugin
+set completeopt=menu,menuone,noselect
+
+" ----- lua -----
+lua << EOF
+local cmp = require'cmp'
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' }
+    })
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+    local opts = { capabilities = capabilites }
+    server:setup(opts)
+end)
+require("gitsigns").setup()
+EOF

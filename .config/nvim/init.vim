@@ -9,6 +9,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -36,7 +37,7 @@ function! s:goyo_enter()
 endfunction
 function! s:goyo_leave()
     set showcmd
-    set scrolloff=0
+    set scrolloff=10
     set cursorline
     Limelight!
     highlight Normal guibg=NONE
@@ -61,6 +62,7 @@ xnoremap J :move '>+1<CR>gv-gv
 nnoremap <C-g> :Goyo<CR>
 
 " ----- General Settings -----
+set scrolloff=10 " keep cursor 15 lines from screen extents
 set nocompatible " enter the current millenium
 set number " line numbers
 set guicursor=n-v-c:block-Cursor " block cursor

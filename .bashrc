@@ -6,15 +6,20 @@
 [[ $- != *i* ]] && return
 
 # bash aliases
-alias ls='ls -F --color=auto'
-alias la='ls -AF'
-alias ll='ls -alFh'
+alias ls='exa -F'
+alias la='exa -aF'
+alias ll='exa -alFh'
 alias grep='grep --color=auto'
 alias ..='cd ..'
 alias mv='mv -i'
+alias :e='nvim'
+alias :e!='sudo nvim'
+alias :q='exit'
+alias view='qiv'
+alias gc='git diff --name-status HEAD'
 
 # bash exports
-export EDITOR=vim
+export EDITOR=nvim
 export PATH="$HOME/.local/bin:$HOME/.ghcup/bin:$PATH" # Add ~/.local/bin to path
 
 # Set terminal promt: js@laptop:~ $
@@ -24,3 +29,4 @@ PS1="\[\033[38;5;41m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;33m\]\w\
 
 # fuck!
 eval "$(thefuck --alias)"
+. "$HOME/.cargo/env"

@@ -1,0 +1,6 @@
+require('plugins')
+require('options')
+require('themes')
+require('keymap')
+require('lsp')
+require('completions')

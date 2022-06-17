@@ -21,3 +21,4 @@ set.cursorline = true
 set.wrap = true
 set.completeopt = 'menu,menuone,noselect'
 set.termguicolors = true
+set.clipboard = set.clipboard + 'unnamedplus'

@@ -14,6 +14,7 @@ alias ..='cd ..'
 alias mv='mv -i'
 alias :e='nvim'
 alias :e!='sudo nvim'
+alias ~='cd ~'
 alias :q='exit'
 alias view='qiv'
 alias gc='git diff --name-status HEAD'
@@ -27,6 +28,4 @@ PS1="\[\033[38;5;41m\]\u@\h\[$(tput sgr0)\]:\[$(tput sgr0)\]\[\033[38;5;33m\]\W\
 
 [ -f "/home/js/.ghcup/env" ] && source "/home/js/.ghcup/env" # ghcup-env
 
-# fuck!
-eval "$(thefuck --alias)"
 . "$HOME/.cargo/env"
